@@ -103,9 +103,12 @@
                     <br><br>
                 </div>
 
+                <div id="box1" class="action start">
+                    <button class="button">დაწყება</button>
+                </div>
             </div>
 
-            <div class="cards">
+            <div class="cards display-none">
 
                 <div class="memory-card" data-object="gbp">
                     <img class="front-face" src="assets/img/gbp.svg" alt="gbp">
@@ -168,10 +171,10 @@
                 </div>
             </div>
 
-            <div class="aside2">
+            <div class="aside2 display-none">
 
                 <div id="box1" class="action">
-                    <button class="button" disabled>თავიდან დაწყება</button>
+                    <button class="button restart" disabled>თავიდან დაწყება</button>
                     <h4>
                         დაშვებული შეცდომა:
                         <br>
@@ -186,7 +189,9 @@
 
     <script>
         const cards = document.querySelectorAll('.memory-card');
-        const button = document.querySelector("button")
+        const restartButton = document.querySelector(".action.restart button")
+        const startButton = document.querySelector(".action.start button")
+
         let hasFlippedCard = false;
         let lockBoard = false;
         let firstCard, secondCard;
@@ -210,7 +215,7 @@
 
             secondCard = this;
             checkForMatch();
-            button.disabled = (pairs !== 6);
+            restartButton.disabled = (pairs !== 6);
             moves++;
             document.getElementById('score').innerHTML = moves
 
@@ -255,10 +260,29 @@
 
         }
 
-        shuffle()
+        
 
-        button.addEventListener('click', resetEverything)
-        cards.forEach(card => card.addEventListener('click', flipCard));
+        
+        startButton.addEventListener('click', start)
+        
+
+        function start(){
+            shuffle()
+            cards.forEach(card => card.addEventListener('click', flipCard));
+            hideStartButton();
+            showGame()
+            restartButton.addEventListener('click', resetEverything)
+        }
+
+        function hideStartButton(){
+            startButton.style.display = "none"
+        }
+
+        function showGame(){
+            document.querySelector('.cards').classList.remove('display-none')
+            document.querySelector('.aside2').classList.remove('display-none')
+            document.querySelector('.aside1').classList.add('started')
+        }
 
         function resetEverything() {
             lockBoard = true;
@@ -293,7 +317,8 @@
 <style>
     * {
         margin: 0;
-        padding: 0
+        padding: 0;
+        transition: all .2s ease;
     }
 
     html,
@@ -428,19 +453,19 @@
         }
 
         section.centralcontent .mainsection h3 span {
-            font-size: 1rem!important;
+            font-size: 1rem !important;
         }
 
         main .aside1 h5 {
-            font-size: 1rem!important;
+            font-size: 1rem !important;
         }
     }
 
     @media all and (max-width: 1200px) {
         section.mainsectionwrapper .mainsection {
-            max-width: 764px!important;
+            max-width: 764px !important;
         }
-        
+
         main {
             width: 90% !important;
         }
@@ -562,6 +587,10 @@
         gap: 24px;
     }
 
+    *.display-none{
+        display:none!important;
+    }
+
     main .aside1 {
         background-color: #edf2f8;
         border-radius: 8px;
@@ -575,6 +604,11 @@
 
         text-align: center;
         margin-right: 0;
+    }
+
+    main .aside1:not(.started){
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 
     main .aside1 h5 {
@@ -592,6 +626,7 @@
 
     main .aside1 img {
         max-width: 200px;
+        max-height: 150px;
 
     }
 
@@ -610,8 +645,7 @@
         text-align: center;
     }
 
-
-    main .aside2 .action {
+    main .action {
         display: flex;
         flex-direction: column;
         margin: 10px;
@@ -621,7 +655,7 @@
         justify-content: space-between;
     }
 
-    main .aside2 button {
+    main .action button {
         width: 100%;
         height: 60px;
 
@@ -639,11 +673,19 @@
         transition: background-color 400ms;
     }
 
-    main .aside2 button:disabled {
+    main .action button:disabled {
         background-color: var(--title-color);
         color: white;
         opacity: .5;
         transition: background-color 400ms;
+    }
+    
+    main .aside1 .action{
+        margin: 0;
+    }
+
+    main .aside1 .action button {
+        margin: 0;
     }
 
     .memory-card {
