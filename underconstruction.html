@@ -14,7 +14,6 @@
         <div class="mainsection">
             <div class="authform fullsize" style="margin-top:0;">
                 <div class="construction">
-                    <img class="constructionlogo" src="assets/img/underconstruction.svg" alt="underconstruction">
                     <h3>საიტზე მიმდინარეობს ტექნიკური სამუშაოები
                         <span>საიტი მალე განახლდება</span>
                     </h3>
@@ -33,7 +32,7 @@
                     <img src="assets/img/gbp.svg" alt="GBP">
                     <br>
                     <h5>
-                        
+
                     </h5>
 
                     <br><br>
@@ -44,7 +43,7 @@
                     <img src="assets/img/gel.svg" alt="Eletrônicos">
                     <br>
                     <h5>
-                        
+
                     </h5>
 
                     <br><br>
@@ -66,7 +65,7 @@
                     <img src="assets/img/rupee.svg" alt="rupee">
                     <br>
                     <h5>
-                        
+
                     </h5>
 
                     <br><br>
@@ -77,7 +76,7 @@
                     <img src="assets/img/yen.svg" alt="yen">
                     <br>
                     <h5>
-                        
+
                     </h5>
 
                     <br><br>
@@ -88,8 +87,8 @@
                     <img src="assets/img/usd.svg" alt="usd">
                     <br>
                     <h5>
-                        
-                        
+
+
                     </h5>
 
                     <br><br>
@@ -423,9 +422,27 @@
         max-height: 705px;
     }
 
+    @media all and (max-width: 1600px) {
+        main {
+            width: 80% !important;
+        }
+
+        section.centralcontent .mainsection h3 span {
+            font-size: 1rem!important;
+        }
+
+        main .aside1 h5 {
+            font-size: 1rem!important;
+        }
+    }
+
     @media all and (max-width: 1200px) {
         section.mainsectionwrapper .mainsection {
-            max-width: 764px;
+            max-width: 764px!important;
+        }
+        
+        main {
+            width: 90% !important;
         }
 
     }
@@ -543,8 +560,6 @@
         grid-template-columns: 1fr 1fr 1fr;
         padding: 0 4%;
         gap: 24px;
-        height: calc(100vh - 80px);
-
     }
 
     main .aside1 {
@@ -577,6 +592,7 @@
 
     main .aside1 img {
         max-width: 200px;
+
     }
 
     main .aside2 {
@@ -632,8 +648,7 @@
 
     .memory-card {
         margin: 5px;
-        /* height: 200px;
-    width: 200px; */
+        max-height: 200px;
         position: relative;
         transform: scale(1);
         border-radius: 20px;
@@ -685,11 +700,18 @@
             max-height: 100%;
         }
 
+        main .cards {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
         main {
             display: flex;
             flex-direction: column;
             max-height: fit-content;
+        }
 
+        .memory-card {
+            height: 150px;
         }
 
         main .aside1 {
@@ -704,7 +726,7 @@
             gap: 10px;
             padding: 0;
         }
-        
+
 
         main .aside1 img {
             max-width: 100px;
@@ -716,12 +738,16 @@
     @media (max-width: 600px) {
 
         main .cards {
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
         }
 
         main .aside1 img {
             max-width: 50px;
+        }
+
+        .memory-card {
+            height: 100px;
         }
     }
 </style>
