@@ -173,8 +173,8 @@
 
             <div class="aside2 display-none">
 
-                <div id="box1" class="action">
-                    <button class="button restart" disabled>თავიდან დაწყება</button>
+                <div id="box1" class="action restart">
+                    <button class="button" disabled>თავიდან დაწყება</button>
                     <h4>
                         დაშვებული შეცდომა:
                         <br>
@@ -188,9 +188,9 @@
     </section>
 
     <script>
-        const cards = document.querySelectorAll('.memory-card');
-        const restartButton = document.querySelector(".action.restart button")
-        const startButton = document.querySelector(".action.start button")
+        let cards;
+        let restartButton;
+        let startButton = document.querySelector(".action.start button");
 
         let hasFlippedCard = false;
         let lockBoard = false;
@@ -267,10 +267,12 @@
         
 
         function start(){
+            showGame()
+            hideStartButton();
+            cards = document.querySelectorAll('.memory-card');
+            restartButton = document.querySelector(".action.restart button")
             shuffle()
             cards.forEach(card => card.addEventListener('click', flipCard));
-            hideStartButton();
-            showGame()
             restartButton.addEventListener('click', resetEverything)
         }
 
